@@ -59,10 +59,9 @@ Then open the printed localhost URL.
 4. **Privacy policy** — `privacy.html` is placeholder copy. Replace with
    your actual policy.
 
-5. **Deploy** — this is a static site with no build step. Drag-and-drop
-   deploy or connect the repo on Vercel, Netlify, or Cloudflare Pages; all
-   three serve over HTTPS by default. Point your Google Ads final URL (and
-   the three sitelinks below) at the deployed domain.
+5. **Deploy** — this repo is connected to Vercel (`dkcm/first-battery-bot-page`);
+   every push to `main` auto-deploys to `first-batterycenter.co.za`. Other
+   branches get their own preview URL.
 
 ## Sitelinks
 
