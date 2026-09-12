@@ -1,0 +1,22 @@
+{
+  "name": "first-battery-bot-page",
+  "version": "1.0.0",
+  "description": "Single-page, static landing site for Google Ads traffic",
+  "scripts": {
+    "dev": "npx serve .",
+    "serve": "npx serve .",
+    "lint": "echo 'No linter configured for vanilla HTML/CSS/JS project'",
+    "test": "echo 'No tests configured'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.12"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fisharman007/First-Battery-BOT-Page"
+  },
+  "keywords": ["battery", "landing-page", "whatsapp"],
+  "author": "",
+  "license": "ISC"
+}
