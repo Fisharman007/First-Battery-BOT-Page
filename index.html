@@ -32,6 +32,7 @@
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
     background: var(--bg);
     color: var(--text);
@@ -63,9 +64,17 @@
     margin: 0 auto;
     padding: 12px 16px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 8px 12px;
+  }
+  .topbar-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
   }
   .brand {
     display: flex;
@@ -109,6 +118,8 @@
   }
   .topbar-phone:hover { border-color: var(--accent); color: var(--accent); }
   .topbar-phone svg { width: 15px; height: 15px; }
+  .topbar-whatsapp { color: var(--whatsapp); }
+  .topbar-whatsapp:hover { border-color: var(--whatsapp); color: var(--whatsapp); }
 
   /* ---------- Hero ---------- */
   .hero {
@@ -129,6 +140,14 @@
     pointer-events: none;
   }
   .hero-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+  .hero-video {
+    margin-bottom: 22px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border);
+  }
+  .hero-video video { display: block; width: 100%; height: auto; aspect-ratio: 720 / 406; background: var(--bg-alt); }
   .hero h1 { font-size: 1.7rem; }
   .hero .subheadline { color: var(--text-dim); font-size: 1.02rem; }
 
@@ -166,6 +185,7 @@
     border-radius: var(--radius);
     padding: 22px 18px;
     box-shadow: var(--shadow-card);
+    scroll-margin-top: 76px;
   }
   .finder-card h2 {
     font-size: 1.1rem;
@@ -263,17 +283,26 @@
     color: var(--text);
   }
   .btn-outline:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .btn-accent {
+    background: var(--accent);
+    color: #201700;
+    box-shadow: var(--shadow-btn);
+    width: 100%;
+    font-size: 1.02rem;
+    margin-bottom: 20px;
+  }
+  .btn-accent:hover { background: #ffcc2e; transform: translateY(-1px); }
 
   a[data-cta="chat"] {
-    opacity: 0;
-    transform: translateY(6px);
+    opacity: 0.45;
     pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
+    cursor: not-allowed;
+    transition: opacity 0.25s ease;
   }
   a[data-cta="chat"].is-ready {
     opacity: 1;
-    transform: translateY(0);
     pointer-events: auto;
+    cursor: pointer;
   }
 
   .section {
@@ -369,20 +398,42 @@
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-name" data-business-name>First Battery Woodmead</span>
     </a>
-    <a href="#" class="topbar-phone" data-phone-link>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.5 2.3.8 3.6.8.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4c0-.6.4-1 1-1h3.2c.6 0 1 .4 1 1 0 1.3.3 2.5.8 3.6.2.3.1.7-.2 1L6.6 10.8z"/></svg>
-      <span data-phone-label>011 000 0000</span>
-    </a>
+    <div class="topbar-actions">
+      <a href="#" class="topbar-phone" data-phone-link>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.5 2.3.8 3.6.8.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4c0-.6.4-1 1-1h3.2c.6 0 1 .4 1 1 0 1.3.3 2.5.8 3.6.2.3.1.7-.2 1L6.6 10.8z"/></svg>
+        <span data-phone-label>011 000 0000</span>
+      </a>
+      <a href="#" class="topbar-phone topbar-whatsapp" data-whatsapp-link data-cta="header-whatsapp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C7.03 3 3 6.58 3 11c0 2.08.94 3.97 2.48 5.4L4 21l4.79-1.44C9.98 19.85 10.97 20 12 20c4.97 0 9-3.58 9-9s-4.03-8-9-8z"/></svg>
+        <span data-whatsapp-label>082 625 2141</span>
+      </a>
+    </div>
   </div>
 </div>
 
 <header class="hero" id="top">
   <div class="hero-inner">
-    <h1 id="headline">Need a new car battery? Get sorted in under a minute</h1>
-    <p class="subheadline" id="subheadline">Select your vehicle, chat with us on WhatsApp, we fit it the same day.</p>
+    <h1 id="headline">Need a new battery? Get a quote in under 60 seconds</h1>
+    <a href="#battery-finder" class="btn btn-accent">
+      <span>Get Me My Quote Now</span>
+    </a>
+    <p class="subheadline" id="subheadline">Free onsite fitment · Fitment while you wait · Walk-ins welcome</p>
     <div class="urgency">
       <span class="pulse-dot" aria-hidden="true"></span>
       <span id="urgency-line">Same-day fitment available — open until 5pm</span>
+    </div>
+
+    <div class="hero-video">
+      <video
+        poster="assets/video/fbc-hero-poster.jpg"
+        muted
+        loop
+        playsinline
+        autoplay
+        controls
+        aria-label="First Battery Centre — Got battery needs?">
+        <source src="assets/video/fbc-hero.mp4" type="video/mp4">
+      </video>
     </div>
 
     <section id="battery-finder" class="finder-card" aria-label="Find your battery">
@@ -428,11 +479,7 @@
       <p class="not-found"><a href="#" id="not-found-link" data-cta="notfound">Can't find your vehicle?</a></p>
 
       <div class="cta-group">
-        <a href="#" class="btn btn-outline" data-cta="callout">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.5 2.3.8 3.6.8.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4c0-.6.4-1 1-1h3.2c.6 0 1 .4 1 1 0 1.3.3 2.5.8 3.6.2.3.1.7-.2 1L6.6 10.8z"/></svg>
-          <span>Request a Callout</span>
-        </a>
-        <a href="#" class="btn btn-whatsapp" data-cta="chat">
+        <a href="#" class="btn btn-whatsapp" data-cta="chat" aria-disabled="true">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C7.03 3 3 6.58 3 11c0 2.08.94 3.97 2.48 5.4L4 21l4.79-1.44C9.98 19.85 10.97 20 12 20c4.97 0 9-3.58 9-9s-4.03-8-9-8z"/></svg>
           <span>Chat on WhatsApp</span>
         </a>
@@ -479,17 +526,14 @@
   <p class="footer-row"><strong data-business-name>First Battery Woodmead</strong></p>
   <p class="footer-row" data-business-address>123 Woodmead Drive, Woodmead, Sandton, 2191</p>
   <p class="footer-row">Call us: <a href="#" data-phone-link>011 000 0000</a></p>
+  <p class="footer-row">WhatsApp us: <a href="#" data-whatsapp-link data-cta="footer-whatsapp" target="_blank" rel="noopener"><span data-whatsapp-label>082 625 2141</span></a></p>
   <p class="footer-row"><a href="#" data-maps-link target="_blank" rel="noopener">View on Google Maps</a></p>
   <p class="footer-row"><a href="privacy.html">Privacy Policy</a></p>
 </footer>
 
 <div class="sticky-cta" id="sticky-cta">
   <div class="cta-group">
-    <a href="#" class="btn btn-outline" data-cta="callout">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.5 2.3.8 3.6.8.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.4 21 3 13.6 3 4c0-.6.4-1 1-1h3.2c.6 0 1 .4 1 1 0 1.3.3 2.5.8 3.6.2.3.1.7-.2 1L6.6 10.8z"/></svg>
-      <span>Callout</span>
-    </a>
-    <a href="#" class="btn btn-whatsapp" data-cta="chat">
+    <a href="#" class="btn btn-whatsapp" data-cta="chat" aria-disabled="true">
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C7.03 3 3 6.58 3 11c0 2.08.94 3.97 2.48 5.4L4 21l4.79-1.44C9.98 19.85 10.97 20 12 20c4.97 0 9-3.58 9-9s-4.03-8-9-8z"/></svg>
       <span>Chat on WhatsApp</span>
     </a>

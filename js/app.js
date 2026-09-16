@@ -104,6 +104,11 @@ function renderBusinessDetails() {
     const label = el.querySelector("[data-phone-label]") || el;
     label.textContent = CONFIG.business.phoneDisplay;
   });
+  document.querySelectorAll("[data-whatsapp-link]").forEach((el) => {
+    el.href = buildWhatsappUrl(CONFIG.messages.callout);
+    const label = el.querySelector("[data-whatsapp-label]") || el;
+    label.textContent = CONFIG.whatsappDisplay;
+  });
 }
 
 // ---------- CTA wiring ----------

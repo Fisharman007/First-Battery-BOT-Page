@@ -14,14 +14,16 @@ export const CONFIG = {
 
   // WhatsApp number both CTAs message, digits only, country code, no leading +
   whatsappNumber: "27826252141",
+  // Human-readable form of the number above, shown in the header/footer.
+  whatsappDisplay: "082 625 2141",
 
   // Flip this to "B" or "C" to test a different headline. Keep the copy
   // close to real search terms for Google Ads Quality Score.
   activeHeadline: "A",
   headlines: {
     A: {
-      headline: "Need a new car battery? Get sorted in under a minute",
-      subheadline: "Select your vehicle, chat with us on WhatsApp, we fit it the same day.",
+      headline: "Need a new battery? Get a quote in under 60 seconds",
+      subheadline: "Free onsite fitment · Fitment while you wait · Walk-ins welcome",
     },
     B: {
       headline: "Same-day battery fitment in Woodmead",
