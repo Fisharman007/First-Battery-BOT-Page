@@ -15,7 +15,7 @@ export const CONFIG = {
   // WhatsApp number both CTAs message, digits only, country code, no leading +
   whatsappNumber: "27826252141",
   // Human-readable form of the number above, shown in the header/footer.
-  whatsappDisplay: "082 625 2141",
+  whatsappDisplay: "+27 82 625 2141",
 
   // Flip this to "B" or "C" to test a different headline. Keep the copy
   // close to real search terms for Google Ads Quality Score.
