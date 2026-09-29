@@ -36,8 +36,8 @@ Then open the printed localhost URL.
    - `business.phoneTel` / `phoneDisplay` / `address` / `hoursFull` /
      `hoursLine`.
    - `maps.url` — the Google Maps directions link.
-   - `headlines` / `activeHeadline` — three headline variants are already
-     written in; flip `activeHeadline` to `"A"`, `"B"`, or `"C"` to test a
+   - `headlines` / `activeHeadline` — four headline variants are already
+     written in; flip `activeHeadline` to `"A"`–`"D"` to test a
      different one, or edit the copy directly.
    - `messages` — the WhatsApp message templates for Chat, Callout, and the
      "Can't find your vehicle?" fallback.

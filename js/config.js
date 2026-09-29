@@ -8,7 +8,7 @@ export const CONFIG = {
     phoneDisplay: "(010) 746 6260",
     phoneTel: "+27107466260",
     address: "Unit CA1, Woodmead Commercial Park, 17 Waterval Crescent, Woodmead, Johannesburg",
-    hoursLine: "Same-day fitment available — open until 17:30",
+    hoursLine: "Same-day fitment. Open until 17:30 on weekdays.",
     hoursFull: "Mon–Fri 08:00–17:30, Sat 08:00–14:00, Sun Closed",
   },
 
@@ -19,8 +19,13 @@ export const CONFIG = {
 
   // Flip this to "B" or "C" to test a different headline. Keep the copy
   // close to real search terms for Google Ads Quality Score.
-  activeHeadline: "A",
+  // The headline is set in wide caps, so shorter copy (D) reads best.
+  activeHeadline: "D",
   headlines: {
+    D: {
+      headline: "Got a flat battery?",
+      subheadline: "We fit a new one today in Woodmead while you wait. Free fitment, walk-ins welcome.",
+    },
     A: {
       headline: "Need a new battery? Get a quote in under 60 seconds",
       subheadline: "Free onsite fitment · Fitment while you wait · Walk-ins welcome",

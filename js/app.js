@@ -121,21 +121,71 @@ function refreshCtaLinks() {
   const ready = Boolean(state.make && state.model);
   const chatHref = ready ? chatUrl() : "#";
   document.querySelectorAll("[data-cta='chat']").forEach((el) => {
-    el.href = chatHref;
     el.classList.toggle("is-ready", ready);
+    if (el.hasAttribute("data-sticky")) {
+      // The sticky bar always works: until a vehicle is picked it takes the
+      // visitor back up to the finder instead of sitting there disabled.
+      el.href = ready ? chatHref : "#battery-finder";
+      el.querySelector("[data-sticky-label]").textContent = ready
+        ? "Send on WhatsApp"
+        : "Pick your vehicle";
+      return;
+    }
+    el.href = chatHref;
     el.setAttribute("aria-disabled", ready ? "false" : "true");
   });
 
-  document.querySelectorAll("[data-cta-group]").forEach((el) => {
-    el.classList.toggle("is-visible", ready);
-  });
+  const hint = document.getElementById("send-hint");
+  if (hint) hint.hidden = ready;
+
+  renderMessagePreview(ready);
 
   document.getElementById("not-found-link").href = notFoundUrl();
+}
+
+// ---------- Message preview ----------
+// Mirrors the exact WhatsApp message the Send button will open, filling in
+// the vehicle as it's picked.
+function renderMessagePreview(ready) {
+  const bubble = document.getElementById("message-preview");
+  const text = document.getElementById("message-text");
+  if (!bubble || !text) return;
+
+  const SLOT = "\u0000";
+  const [before, after = ""] = CONFIG.messages.chat(SLOT).split(SLOT);
+  const label = vehicleLabel();
+
+  text.textContent = before;
+  if (label) {
+    const filled = document.createElement("span");
+    filled.className = "filled";
+    filled.textContent = label;
+    text.appendChild(filled);
+  }
+  if (!state.model) {
+    if (label) text.append(" ");
+    const blank = document.createElement("span");
+    blank.className = "blank";
+    blank.setAttribute("aria-label", "your car");
+    text.appendChild(blank);
+  }
+  text.append(after);
+
+  if (ready !== bubble.classList.contains("is-ready")) {
+    bubble.classList.toggle("is-ready", ready);
+  }
 }
 
 function onWhatsappLinkClick(event) {
   const el = event.currentTarget;
   const kind = el.dataset.cta;
+  if (kind === "chat" && el.hasAttribute("data-sticky") && !el.classList.contains("is-ready")) {
+    event.preventDefault();
+    document.getElementById("battery-finder").scrollIntoView({ block: "start" });
+    const next = document.getElementById(state.make ? "model-input" : "make-input");
+    if (!next.disabled) next.focus({ preventScroll: true });
+    return;
+  }
   if (kind === "chat" && el.getAttribute("aria-disabled") === "true") {
     event.preventDefault();
     return;
@@ -259,7 +309,7 @@ function resetModelAndVariant() {
   state.model = "";
   currentModels = [];
 
-  if (modelCombobox) modelCombobox.disable("Select make first");
+  if (modelCombobox) modelCombobox.disable("Pick make");
   resetYearAndVariant();
 
   refreshCtaLinks();
@@ -270,7 +320,7 @@ function resetYearAndVariant() {
   currentGroups = [];
 
   const yearSelect = document.getElementById("year-select");
-  yearSelect.innerHTML = '<option value="">Select model first</option>';
+  yearSelect.innerHTML = '<option value="">Pick model</option>';
   yearSelect.disabled = true;
 
   resetVariantSelect();
@@ -279,7 +329,7 @@ function resetYearAndVariant() {
 function resetVariantSelect() {
   state.variant = null;
   const variantSelect = document.getElementById("variant-select");
-  variantSelect.innerHTML = '<option value="">Select year first</option>';
+  variantSelect.innerHTML = '<option value="">Pick year</option>';
   variantSelect.disabled = true;
 }
 
@@ -288,7 +338,7 @@ async function onMakeSelected(make) {
   state.model = "";
 
   currentModels = await getModels(make);
-  if (modelCombobox) modelCombobox.enable("Start typing a model");
+  if (modelCombobox) modelCombobox.enable("Corolla");
   resetYearAndVariant();
 
   refreshCtaLinks();
