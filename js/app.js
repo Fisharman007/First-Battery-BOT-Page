@@ -463,7 +463,7 @@ async function main() {
   } catch (err) {
     console.error("Could not load vehicle catalogue:", err);
     const input = document.getElementById("make-input");
-    input.placeholder = "Vehicle list unavailable — use Callout below";
+    input.placeholder = "List unavailable, just tap Send";
     input.disabled = true;
   }
 }

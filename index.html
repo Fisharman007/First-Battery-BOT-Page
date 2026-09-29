@@ -187,7 +187,9 @@
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
-  .field-wide { grid-column: 1 / -1; }
+  @media (max-width: 359px) {
+    .fields { grid-template-columns: 1fr; }
+  }
   .field label {
     display: block;
     font-size: 0.82rem;
@@ -292,7 +294,7 @@
     align-items: center;
     gap: 4px;
     font-size: 0.72rem;
-    color: rgba(233, 237, 239, 0.6);
+    color: #c5d3d0;
   }
   .ticks { width: 17px; height: 11px; color: rgba(233, 237, 239, 0.45); }
   .bubble.is-ready .ticks { color: var(--tick); }
@@ -329,7 +331,7 @@
   .send-hint[hidden] { display: none; }
 
   /* ---------- Content sections ---------- */
-  .section { padding: 64px 0; border-top: 1px solid #1f1f1f; }
+  .section { padding: 64px 0; border-top: 1px solid #1f1f1f; scroll-margin-top: 60px; }
   .section h2 {
     font-stretch: var(--wide);
     font-weight: 800;
@@ -464,7 +466,7 @@
 </head>
 <body>
 
-<div class="topbar">
+<header class="topbar">
   <div class="wrap topbar-inner">
     <a href="#top" class="brand">
       <span class="brand-mark" aria-hidden="true"></span>
@@ -481,10 +483,10 @@
       </a>
     </div>
   </div>
-</div>
+</header>
 
 <main>
-<header class="hero" id="top">
+<section class="hero" id="top">
   <div class="wrap">
     <div class="hero-top">
       <h1 id="headline">Got a flat battery?</h1>
@@ -563,7 +565,7 @@
       </div>
     </section>
   </div>
-</header>
+</section>
 
 <section class="section" id="how-it-works" aria-labelledby="how-heading">
   <div class="wrap">
@@ -663,12 +665,12 @@
   </div>
 </footer>
 
-<div class="sticky-cta" id="sticky-cta">
+<aside class="sticky-cta" id="sticky-cta" aria-label="Chat on WhatsApp">
   <a href="#" class="btn btn-whatsapp" data-cta="chat" data-sticky target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C7.03 3 3 6.58 3 11c0 2.08.94 3.97 2.48 5.4L4 21l4.79-1.44C9.98 19.85 10.97 20 12 20c4.97 0 9-3.58 9-9s-4.03-8-9-8z"/></svg>
     <span>Chat on WhatsApp</span>
   </a>
-</div>
+</aside>
 
 <script type="module" src="js/app.js"></script>
 </body>
