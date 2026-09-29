@@ -10,6 +10,9 @@ export const CONFIG = {
     address: "Unit CA1, Woodmead Commercial Park, 17 Waterval Crescent, Woodmead, Johannesburg",
     hoursLine: "Same-day fitment. Open until 17:30 on weekdays.",
     hoursFull: "Mon–Fri 08:00–17:30, Sat 08:00–14:00, Sun Closed",
+    // Keep in step with the Google Business listing (checked 2026-09-29).
+    googleRating: "4.7",
+    googleReviewCount: 78,
   },
 
   // WhatsApp number both CTAs message, digits only, country code, no leading +

@@ -100,6 +100,12 @@ function renderBusinessDetails() {
   document.querySelectorAll("[data-business-hours]").forEach((el) => {
     el.textContent = CONFIG.business.hoursFull;
   });
+  document.querySelectorAll("[data-rating]").forEach((el) => {
+    el.textContent = CONFIG.business.googleRating;
+  });
+  document.querySelectorAll("[data-review-count]").forEach((el) => {
+    el.textContent = CONFIG.business.googleReviewCount;
+  });
   document.querySelectorAll("[data-maps-link]").forEach((el) => {
     el.href = mapsUrl;
   });

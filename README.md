@@ -35,6 +35,8 @@ Then open the printed localhost URL.
    - `whatsappNumber` — digits only, country code, no `+` or spaces.
    - `business.phoneTel` / `phoneDisplay` / `address` / `hoursFull` /
      `hoursLine`.
+   - `business.googleRating` / `googleReviewCount` — the hero review line.
+     Keep these matching the Google Business listing.
    - `maps.url` — the Google Maps directions link.
    - `headlines` / `activeHeadline` — four headline variants are already
      written in; flip `activeHeadline` to `"A"`–`"D"` to test a
