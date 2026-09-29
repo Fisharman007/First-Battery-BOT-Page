@@ -283,12 +283,6 @@
     border-bottom: 10px solid transparent;
   }
   .bubble p { margin: 0; }
-  .bubble .blank {
-    display: inline-block;
-    width: 4.5em;
-    border-bottom: 2px dashed rgba(233, 237, 239, 0.45);
-    vertical-align: baseline;
-  }
   .bubble .filled { font-weight: 700; }
   .bubble-meta {
     position: absolute;
@@ -331,8 +325,6 @@
   .btn-outline { background: transparent; color: var(--white); box-shadow: inset 0 0 0 2px var(--line); }
   .btn-outline:hover { box-shadow: inset 0 0 0 2px var(--white); }
 
-  a[data-cta="chat"] { opacity: 0.4; pointer-events: none; cursor: not-allowed; }
-  a[data-cta="chat"].is-ready { opacity: 1; pointer-events: auto; cursor: pointer; }
   .send-hint { font-size: 0.88rem; color: var(--muted); margin: 10px 0 0; text-align: center; }
   .send-hint[hidden] { display: none; }
 
@@ -436,8 +428,6 @@
   }
   .sticky-cta.is-visible { transform: translateY(0); }
   .sticky-cta .btn { height: 52px; }
-  .sticky-cta a[data-sticky] { opacity: 1; pointer-events: auto; cursor: pointer; }
-  .sticky-cta a[data-sticky]:not(.is-ready) { background: var(--yellow); color: var(--black); }
 
   @media (min-width: 900px) {
     :root { --gutter: 32px; }
@@ -558,18 +548,18 @@
         <p class="send-caption" id="preview-caption">This is the message we'll get on WhatsApp</p>
         <div class="chat">
           <div class="bubble" id="message-preview" aria-labelledby="preview-caption" aria-live="polite">
-            <p id="message-text">Hi, I need a battery for my <span class="blank"></span></p>
+            <p id="message-text">Hi, I need a battery</p>
             <span class="bubble-meta" aria-hidden="true">
               <span>now</span>
               <svg class="ticks" viewBox="0 0 17 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6l3.5 3.5L11 2"/><path d="M7.5 9.5L15.5 2"/></svg>
             </span>
           </div>
         </div>
-        <a href="#" class="btn btn-whatsapp" data-cta="chat" aria-disabled="true">
+        <a href="#" class="btn btn-whatsapp" data-cta="chat" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C7.03 3 3 6.58 3 11c0 2.08.94 3.97 2.48 5.4L4 21l4.79-1.44C9.98 19.85 10.97 20 12 20c4.97 0 9-3.58 9-9s-4.03-8-9-8z"/></svg>
           <span>Send on WhatsApp</span>
         </a>
-        <p class="send-hint" id="send-hint">Pick your make and model to send</p>
+        <p class="send-hint" id="send-hint">Add your car above and we can quote you straight away</p>
       </div>
     </section>
   </div>
@@ -581,8 +571,8 @@
     <p class="section-intro">No forms and no waiting for a call back.</p>
     <ol class="steps">
       <li>
-        <h3>Send us your car</h3>
-        <p>Pick your make and model above and tap Send. WhatsApp opens with the message ready.</p>
+        <h3>Message us</h3>
+        <p>Tell us your car above, or just tap Send and say hi. WhatsApp opens with the message ready.</p>
       </li>
       <li>
         <h3>Get your quote</h3>
@@ -674,9 +664,9 @@
 </footer>
 
 <div class="sticky-cta" id="sticky-cta">
-  <a href="#battery-finder" class="btn btn-whatsapp" data-cta="chat" data-sticky aria-disabled="false">
+  <a href="#" class="btn btn-whatsapp" data-cta="chat" data-sticky target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C7.03 3 3 6.58 3 11c0 2.08.94 3.97 2.48 5.4L4 21l4.79-1.44C9.98 19.85 10.97 20 12 20c4.97 0 9-3.58 9-9s-4.03-8-9-8z"/></svg>
-    <span data-sticky-label>Pick your vehicle</span>
+    <span>Chat on WhatsApp</span>
   </a>
 </div>
 

@@ -39,8 +39,10 @@ Then open the printed localhost URL.
    - `headlines` / `activeHeadline` — four headline variants are already
      written in; flip `activeHeadline` to `"A"`–`"D"` to test a
      different one, or edit the copy directly.
-   - `messages` — the WhatsApp message templates for Chat, Callout, and the
-     "Can't find your vehicle?" fallback.
+   - `messages` — the WhatsApp message templates for Chat, Callout, the
+     "Can't find your vehicle?" fallback, and `quick`. The vehicle form is
+     optional: Send always works, and with no vehicle picked it sends
+     `messages.quick` ("Hi, I need a battery").
 
 3. **Tracking** — still in `js/config.js`:
    - `ga4MeasurementId` — your GA4 measurement ID (e.g. `G-XXXXXXXXXX`).
@@ -48,7 +50,8 @@ Then open the printed localhost URL.
    - `googleAds.conversionId` / `conversionLabel` — from your Google Ads
      conversion action. When both are set, clicking "Chat on WhatsApp" or
      "Callout" fires a Google Ads conversion event. When either is blank,
-     the click instead fires a GA4 `whatsapp_click` event (requires
+     the click instead fires a GA4 `whatsapp_click` event, with `cta_type`
+     `chat` for a form send or `chat_quick` for a send with no vehicle (requires
      `ga4MeasurementId` to be set) so you still have a fallback signal until
      Ads conversion tracking is wired up.
    - UTM handling needs no config: if the landing URL carries

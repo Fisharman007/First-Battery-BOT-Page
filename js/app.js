@@ -72,6 +72,10 @@ function chatUrl() {
   return buildWhatsappUrl(CONFIG.messages.chat(vehicleLabel()));
 }
 
+function quickUrl() {
+  return buildWhatsappUrl(CONFIG.messages.quick);
+}
+
 function notFoundUrl() {
   return buildWhatsappUrl(CONFIG.messages.notFound);
 }
@@ -125,27 +129,19 @@ function refreshCtaLinks() {
     el.href = calloutHref;
   });
 
-  const ready = Boolean(state.make && state.model);
-  const chatHref = ready ? chatUrl() : "#";
+  // The form is optional: with no vehicle picked, Send still opens WhatsApp
+  // with the quick message. Picking a make (and more) just enriches it.
+  const hasVehicle = Boolean(state.make);
+  const chatHref = hasVehicle ? chatUrl() : quickUrl();
   document.querySelectorAll("[data-cta='chat']").forEach((el) => {
-    el.classList.toggle("is-ready", ready);
-    if (el.hasAttribute("data-sticky")) {
-      // The sticky bar always works: until a vehicle is picked it takes the
-      // visitor back up to the finder instead of sitting there disabled.
-      el.href = ready ? chatHref : "#battery-finder";
-      el.querySelector("[data-sticky-label]").textContent = ready
-        ? "Send on WhatsApp"
-        : "Pick your vehicle";
-      return;
-    }
     el.href = chatHref;
-    el.setAttribute("aria-disabled", ready ? "false" : "true");
+    el.classList.toggle("is-ready", hasVehicle);
   });
 
   const hint = document.getElementById("send-hint");
-  if (hint) hint.hidden = ready;
+  if (hint) hint.hidden = hasVehicle;
 
-  renderMessagePreview(ready);
+  renderMessagePreview(hasVehicle);
 
   document.getElementById("not-found-link").href = notFoundUrl();
 }
@@ -153,50 +149,32 @@ function refreshCtaLinks() {
 // ---------- Message preview ----------
 // Mirrors the exact WhatsApp message the Send button will open, filling in
 // the vehicle as it's picked.
-function renderMessagePreview(ready) {
+function renderMessagePreview(hasVehicle) {
   const bubble = document.getElementById("message-preview");
   const text = document.getElementById("message-text");
   if (!bubble || !text) return;
 
-  const SLOT = "\u0000";
-  const [before, after = ""] = CONFIG.messages.chat(SLOT).split(SLOT);
-  const label = vehicleLabel();
-
-  text.textContent = before;
-  if (label) {
+  if (!hasVehicle) {
+    text.textContent = CONFIG.messages.quick;
+  } else {
+    const SLOT = "\u0000";
+    const [before, after = ""] = CONFIG.messages.chat(SLOT).split(SLOT);
     const filled = document.createElement("span");
     filled.className = "filled";
-    filled.textContent = label;
-    text.appendChild(filled);
+    filled.textContent = vehicleLabel();
+    text.textContent = before;
+    text.append(filled, after);
   }
-  if (!state.model) {
-    if (label) text.append(" ");
-    const blank = document.createElement("span");
-    blank.className = "blank";
-    blank.setAttribute("aria-label", "your car");
-    text.appendChild(blank);
-  }
-  text.append(after);
 
-  if (ready !== bubble.classList.contains("is-ready")) {
-    bubble.classList.toggle("is-ready", ready);
+  if (hasVehicle !== bubble.classList.contains("is-ready")) {
+    bubble.classList.toggle("is-ready", hasVehicle);
   }
 }
 
 function onWhatsappLinkClick(event) {
   const el = event.currentTarget;
-  const kind = el.dataset.cta;
-  if (kind === "chat" && el.hasAttribute("data-sticky") && !el.classList.contains("is-ready")) {
-    event.preventDefault();
-    document.getElementById("battery-finder").scrollIntoView({ block: "start" });
-    const next = document.getElementById(state.make ? "model-input" : "make-input");
-    if (!next.disabled) next.focus({ preventScroll: true });
-    return;
-  }
-  if (kind === "chat" && el.getAttribute("aria-disabled") === "true") {
-    event.preventDefault();
-    return;
-  }
+  let kind = el.dataset.cta;
+  if (kind === "chat" && !state.make) kind = "chat_quick";
   trackWhatsappClick(kind);
 }
 
@@ -424,7 +402,9 @@ function escapeHtml(str) {
 // ---------- Sticky mobile CTA ----------
 function initStickyCta() {
   const sticky = document.getElementById("sticky-cta");
-  const finder = document.getElementById("battery-finder");
+  // Watch the finder's own Send button: on phones it starts below the fold,
+  // so the WhatsApp bar is one tap away from the very first screen.
+  const finder = document.querySelector("#battery-finder [data-cta='chat']");
   if (!sticky || !finder) return;
 
   const observer = new IntersectionObserver(
