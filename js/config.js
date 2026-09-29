@@ -49,6 +49,9 @@ export const CONFIG = {
   maps: {
     // The business's existing Google Maps directions link.
     url: "https://share.google/csvciyYZ7nWOaoYmi",
+    // What the embedded map and the "Get directions" button search for.
+    // Directions open turn-by-turn navigation from the visitor's location.
+    query: "First Battery Centre, 17 Waterval Crescent, Woodmead Commercial Park, Woodmead, Johannesburg",
   },
 
   // Google Analytics 4 measurement id, e.g. "G-XXXXXXXXXX". Leave blank to

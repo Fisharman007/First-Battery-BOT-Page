@@ -2,3 +2,4 @@ first-battery-landing.zip
 
 .vercel
 .env*
+.playwright-mcp

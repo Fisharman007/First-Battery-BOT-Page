@@ -402,7 +402,10 @@
   .visit-details dt { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 2px; }
   .visit-details dd { margin: 0; font-size: 1.1rem; font-weight: 600; max-width: 26em; }
   .visit-actions { display: grid; gap: 10px; max-width: 420px; }
-  .visit-video { border-radius: 18px; overflow: hidden; background: #111; align-self: start; }
+  .visit-media { display: grid; gap: 16px; align-self: start; }
+  .visit-map { border-radius: 18px; overflow: hidden; background: #1a1a1a; }
+  .visit-map iframe { display: block; width: 100%; height: 320px; border: 0; }
+  .visit-video { border-radius: 18px; overflow: hidden; background: #111; }
   .visit-video video { width: 100%; height: auto; aspect-ratio: 720 / 406; }
 
   footer {
@@ -462,6 +465,7 @@
     .steps li { grid-template-columns: 1fr; row-gap: 14px; }
     .steps li::before { grid-row: auto; }
     .visit { grid-template-columns: 1fr 1.2fr; gap: 64px; }
+    .visit-map iframe { height: 400px; }
     .footer-inner { grid-template-columns: auto 1fr; gap: 40px; align-items: center; }
     footer { padding-bottom: 48px; }
     .sticky-cta { display: none; }
@@ -630,18 +634,27 @@
         </div>
       </dl>
       <div class="visit-actions">
-        <a href="#" class="btn btn-yellow" data-maps-link target="_blank" rel="noopener">Get directions</a>
+        <a href="#" class="btn btn-yellow" data-directions-link target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg>
+          <span>Get directions</span>
+        </a>
         <a href="#" class="btn btn-outline" data-cta="callout">
           <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3C7.03 3 3 6.58 3 11c0 2.08.94 3.97 2.48 5.4L4 21l4.79-1.44C9.98 19.85 10.97 20 12 20c4.97 0 9-3.58 9-9s-4.03-8-9-8z"/></svg>
           <span>Chat on WhatsApp</span>
         </a>
       </div>
     </div>
+    <div class="visit-media">
+    <div class="visit-map">
+      <iframe data-map-embed title="Map showing First Battery Woodmead" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+    </div>
     <div class="visit-video">
       <video poster="assets/video/fbc-hero-poster.jpg" controls muted playsinline preload="none"
              aria-label="First Battery Centre — Got battery needs?">
         <source src="assets/video/fbc-hero.mp4" type="video/mp4">
       </video>
+    </div>
     </div>
   </div>
 </section>

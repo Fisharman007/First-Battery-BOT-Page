@@ -99,6 +99,13 @@ function renderBusinessDetails() {
   document.querySelectorAll("[data-maps-link]").forEach((el) => {
     el.href = mapsUrl;
   });
+  const mapsQuery = encodeURIComponent(CONFIG.maps.query);
+  document.querySelectorAll("[data-directions-link]").forEach((el) => {
+    el.href = `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`;
+  });
+  document.querySelectorAll("[data-map-embed]").forEach((el) => {
+    el.src = `https://www.google.com/maps?q=${mapsQuery}&z=16&output=embed`;
+  });
   document.querySelectorAll("[data-phone-link]").forEach((el) => {
     el.href = `tel:${CONFIG.business.phoneTel}`;
     const label = el.querySelector("[data-phone-label]") || el;
