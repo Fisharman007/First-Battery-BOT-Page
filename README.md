@@ -61,8 +61,9 @@ Then open the printed localhost URL.
      and prepended to the WhatsApp message as `[Ad: <value>] ...` so you can
      tell which ad drove a conversation from inside WhatsApp itself.
 
-4. **Privacy policy** — `privacy.html` is placeholder copy. Replace with
-   your actual policy.
+4. **Legal pages** — `terms.html` and `privacy.html` are draft copy that
+   reference Google's Terms and Privacy Policy (for Maps, Analytics and
+   Ads). Have them reviewed before relying on them.
 
 5. **Deploy** — this repo is connected to Vercel (`dkcm/first-battery-bot-page`);
    every push to `main` auto-deploys to `first-batterycenter.co.za`. Other
@@ -85,5 +86,6 @@ js/config.js       business details, CTA copy, tracking IDs — the only file yo
 js/vehicles.js     loads + indexes data/vehicles.json
 js/app.js          UI wiring: combobox, CTA state, sticky bar, UTM + tracking
 data/vehicles.json sample catalogue — replace with your real data
-privacy.html       placeholder privacy policy
+terms.html         terms of use (draft)
+privacy.html       privacy policy (draft)
 ```
