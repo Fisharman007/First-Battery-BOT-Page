@@ -47,7 +47,8 @@ export const CONFIG = {
     chat: (vehicleLabel) => `Hi, I need a battery for my ${vehicleLabel}`,
     // Sent when the visitor taps Send without picking a vehicle.
     quick: "Hi, I need a battery",
-    callout: "Callout",
+    // Sent from the header, Visit us and footer WhatsApp links.
+    callout: "Hi, I'm looking for a battery",
     notFound: "Hi, I need a battery but couldn't find my vehicle on the site",
   },
 

@@ -263,9 +263,16 @@ function createCombobox({ wrapperId, inputId, listId, getItems, onSelect, onEdit
       activeIndex = Math.max(activeIndex - 1, 0);
       renderList();
     } else if (e.key === "Enter") {
-      if (activeIndex >= 0 && filtered[activeIndex]) {
+      // With nothing highlighted, Enter still picks an exact match or the
+      // only remaining suggestion.
+      const q = input.value.trim().toLowerCase();
+      const pick =
+        (activeIndex >= 0 && filtered[activeIndex]) ||
+        filtered.find((m) => m.toLowerCase() === q) ||
+        (filtered.length === 1 ? filtered[0] : undefined);
+      if (!list.hidden && pick) {
         e.preventDefault();
-        select(filtered[activeIndex]);
+        select(pick);
       }
     } else if (e.key === "Escape") {
       closeList();
