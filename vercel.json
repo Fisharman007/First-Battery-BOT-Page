@@ -1,6 +1,12 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [{ "type": "host", "value": "first-battery-bot-page.vercel.app" }],
+      "destination": "https://www.first-batterycenter.co.za/",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "first-battery-bot-page.vercel.app" }],
       "destination": "https://www.first-batterycenter.co.za/:path*",
