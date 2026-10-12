@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://first-battery-bot-page.vercel.app/sitemap.xml
